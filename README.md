@@ -26,17 +26,38 @@ The process involves:
 ### 1. Clone the Repository
 
 ```sh
-git clone https://github.com/yourusername/acme-minecraft-server.git
-cd acme-minecraft-server
+git clone https://github.com/blakeschafer/Minecraft-Server.git
+cd Minecraft-Server
 ```
 
 ### 2. Configure AWS CLI
 
-Ensure your AWS CLI is configured with the necessary credentials.
+Ensure your AWS CLI is configured with the necessary credentials. Follow these steps:
 
-```sh
-aws configure
-```
+1. **Install AWS CLI**: If you haven't installed AWS CLI, download and install it from [here](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).
+
+2. **Configure AWS CLI**: Open your terminal and run the following command:
+
+    ```sh
+    aws configure
+    ```
+
+3. **Enter Your AWS Credentials**: You will be prompted to enter your AWS Access Key ID, Secret Access Key, region, and output format. Make sure you have these credentials ready.
+
+    ```plaintext
+    AWS Access Key ID [None]: YOUR_ACCESS_KEY
+    AWS Secret Access Key [None]: YOUR_SECRET_KEY
+    Default region name [None]: us-west-2
+    Default output format [None]: json
+    ```
+
+4. **Verify Configuration**: To verify that your credentials are configured correctly, run:
+
+    ```sh
+    aws sts get-caller-identity
+    ```
+
+   This command should return your AWS account details if the configuration is correct.
 
 ### 3. Provision Infrastructure with Terraform
 
