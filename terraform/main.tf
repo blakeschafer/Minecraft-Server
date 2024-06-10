@@ -2,6 +2,12 @@ provider "aws" {
   region = "us-west-2"
 }
 
+# Create an SSH key pair
+resource "aws_key_pair" "deployer" {
+  key_name   = "deployer-key"
+  public_key = file("~/.ssh/your-key.pub")
+}
+
 resource "aws_security_group" "minecraft_sg" {
   name        = "minecraft_sg"
   description = "Allow Minecraft access"
@@ -25,6 +31,7 @@ resource "aws_security_group" "minecraft_sg" {
 resource "aws_instance" "minecraft" {
   ami           = "ami-0c55b159cbfafe1f0"  # Replace with the AMI ID of your choice
   instance_type = "t2.micro"
+  key_name      = aws_key_pair.deployer.key_name
   security_groups = ["${aws_security_group.minecraft_sg.name}"]
 
   tags = {
